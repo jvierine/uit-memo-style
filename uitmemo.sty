@@ -1,0 +1,56 @@
+%% Reusable UiT technical memo style, derived from mmmemo.sty (2026-09-10).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{uitmemo}[2026/09/14 v1.0 Reusable UiT memo style]
+\RequirePackage[letterpaper,top=0.58in,bottom=0.62in,left=0.72in,right=0.72in]{geometry}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{newtxtext}
+\RequirePackage{newtxmath}
+\RequirePackage{microtype}
+\RequirePackage{graphicx}
+\RequirePackage{booktabs}
+\RequirePackage{siunitx}
+\RequirePackage{amsmath}
+\RequirePackage{enumitem}
+\RequirePackage{needspace}
+\RequirePackage{caption}
+\RequirePackage{fancyhdr}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{xcolor}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.48em plus 0.12em minus 0.08em}
+\setlist{nosep,leftmargin=1.35em}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\captionsetup{font=small,labelfont=bf,skip=4pt}
+\sisetup{detect-all,per-mode=symbol,range-phrase=--}
+\newif\ifuitprovenance
+\uitprovenancetrue
+\newcommand{\showscriptprovenance}{\uitprovenancetrue}
+\newcommand{\hidescriptprovenance}{\uitprovenancefalse}
+\newcommand{\scriptprovenance}[1]{\ifuitprovenance\par\vspace{1pt}{\footnotesize\itshape Script: \texttt{\detokenize{#1}}.}\fi}
+\newcommand{\uitseries}{TECHNICAL MEMO SERIES}
+\newcommand{\uitprefix}{UiT}
+\newcommand{\uitinstitution}{UIT THE ARCTIC UNIVERSITY OF NORWAY}
+\newcommand{\uitlocation}{TROMS\O, NORWAY}
+\newcommand{\uitlogo}{assets/uit-circular-logo.pdf}
+\newcommand{\uitnumber}{}
+\newcommand{\uitdate}{}
+\newcommand{\uitto}{}
+\newcommand{\uitfrom}{}
+\newcommand{\uitsubject}{}
+\newcommand{\uitmemo}[5]{\renewcommand{\uitnumber}{#1}\renewcommand{\uitdate}{#2}\renewcommand{\uitto}{#3}\renewcommand{\uitfrom}{#4}\renewcommand{\uitsubject}{#5}}
+\newcommand{\makeuitmemo}{%
+ \thispagestyle{plain}
+ \begin{minipage}[c]{0.12\textwidth}\IfFileExists{\uitlogo}{\includegraphics[width=0.62in]{\uitlogo}}{}\end{minipage}%
+ \begin{minipage}[c]{0.57\textwidth}\raggedright\bfseries\uitinstitution\\\uitseries\\\uitlocation\end{minipage}\hfill
+ \begin{minipage}[c]{0.29\textwidth}\raggedleft\bfseries\uitprefix\ MEMO \#\uitnumber\\\normalfont\uitdate\end{minipage}
+ \par\vspace{0.42em}\hrule height 0.7pt\vspace{0.48em}
+ \begin{tabular}{@{}p{0.72in}p{\dimexpr\textwidth-0.72in-2\tabcolsep\relax}@{}}
+ \textbf{To:}&\uitto\\\textbf{From:}&\uitfrom\\\textbf{Subject:}&\textbf{\uitsubject}
+ \end{tabular}\par\vspace{0.35em}\hrule height 0.35pt\vspace{0.5em}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\footnotesize\uitprefix\ MEMO \#\uitnumber}
+\fancyhead[R]{\footnotesize\nouppercase{\leftmark}}
+\fancyfoot[C]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+\setlength{\headheight}{13.5pt}
+\endinput
